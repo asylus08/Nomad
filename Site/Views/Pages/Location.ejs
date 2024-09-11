@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageTitle %>
+    </title>
+    <%- include ("../Partials/Bootstrap.ejs") %>
+    <%- include ("../Partials/Head.ejs") %>
+
+    <script src="../../public/JavaScript/Location.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Datepicker CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        rel="stylesheet">
+</head>
+
+<body>
+    <%- include ("../Partials/Header.ejs") %>
+
+    <div class="container mt-5">
+        <!-- <h1 class="text-center">Date Selector</h1> -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <!-- <label for="datepicker">Select a date:</label> -->
+                    <input type="date" class="form-control" id="datepicker1" name="datepicker1" placeholder="Date d'arrivée">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <!-- <label for="datepicker">Select a date:</label> -->
+                    <input type="date" class="form-control" id="datepicker2" name="datepicker2" placeholder="Date de départ">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="numVoyageur">Nombre de voyageurs :</label>
+            <input type="number" id="numVoyageur" name="numVoyageur" min="1" value="1">
+        </div>
+        <div class="col-md-12">
+            
+            
+            <p id="prix" class="mt-3" style="display: none;"><%= prix %></p>
+            <div class="form-group">
+                <button class="btn btn-primary" id="calculateDaysBtn" onclick="calculer(prix.innerText)">Vos frais</button>
+            </div>
+            <p id="prixR" class="mt-3"></p>
+            <div id="result" class="mt-3"></div>
+            <!-- <button class="btn btn-primary" id="prix"></button> -->
+            
+        </div>
+        <div>
+            <button class="btn btn-primary" id="reserverBtn" >Confirmer réservation</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Datepicker JS -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        // Initialize the datepicker
+        $(document).ready(function () {
+            $('#datepicker1, #datepicker2').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            });
+
+            $('#calculateDaysBtn').on('click', function () {
+                var date1 = $('#datepicker1').datepicker('getDate');
+                var date2 = $('#datepicker2').datepicker('getDate');
+
+                if (date1 && date2) {
+                    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    $('#result').html('Number of days between the selected dates: ' + diffDays);
+                } else {
+                    $('#result').html('Please select both dates.');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

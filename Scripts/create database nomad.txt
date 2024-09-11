@@ -1,0 +1,126 @@
+create database nomad;
+
+use nomad;
+
+CREATE TABLE client (
+    id_client        INT NOT NULL AUTO_INCREMENT,
+    nom              VARCHAR(100) NOT NULL,
+    prenom           VARCHAR(100) NOT NULL,
+    courriel         VARCHAR(100) NOT NULL,
+    mot_de_passe     VARCHAR(20) NOT NULL,
+    numero_telephone VARCHAR(10),
+    PRIMARY KEY (id_client)
+);
+
+CREATE TABLE demande_aide (
+    id_demande_aide INT NOT NULL AUTO_INCREMENT,
+    details         VARCHAR(1000),
+    PRIMARY KEY (id_demande_aide)
+);
+
+CREATE TABLE destination (
+    id_destination   INT NOT NULL AUTO_INCREMENT,
+    ville            VARCHAR(100) NOT NULL,
+    region           VARCHAR(100) NOT NULL,
+    pays             VARCHAR(100),
+    description      VARCHAR(2000),
+    PRIMARY KEY (id_destination)
+    
+);
+
+CREATE TABLE location (
+    id_location                INT NOT NULL AUTO_INCREMENT,
+    logement_id_logement       INT NOT NULL,
+    client_id_client           INT NOT NULL,
+    transaction_id_transaction INT NOT NULL,
+    PRIMARY KEY (id_location)
+);
+
+CREATE TABLE logement (
+    id_logement                INT NOT NULL AUTO_INCREMENT,
+    adresse                    VARCHAR(100) NOT NULL,
+    nom_proprietaire           VARCHAR(100) NOT NULL,
+    destination                VARCHAR(100) NOT NULL,
+    prix                       DECIMAL(10,2) NOT NULL,
+    description                VARCHAR(2000),
+    disponibilite              VARCHAR(30) NOT NULL,
+	nombreChambre              INT NOT NULL,
+    nombrePersonnes            INT NOT NULL,
+    proprietaire_id_client     INT DEFAULT NULL,
+    destination_id_destination INT DEFAULT NULL,
+    PRIMARY KEY (id_logement)
+);
+
+CREATE TABLE proprietaire (
+    id_client        INT NOT NULL AUTO_INCREMENT,
+    nom              VARCHAR(100) NOT NULL,
+    prenom           VARCHAR(100) NOT NULL,
+    courriel         VARCHAR(100) NOT NULL,
+    mot_de_passe     VARCHAR(20) NOT NULL,
+    numero_telephone VARCHAR(10),
+    PRIMARY KEY (id_client)
+);
+
+CREATE TABLE relation_10 (
+    client_id_client             INT NOT NULL,
+    demande_aide_id_demande_aide INT NOT NULL,
+    PRIMARY KEY (client_id_client, demande_aide_id_demande_aide),
+    FOREIGN KEY (client_id_client) REFERENCES client (id_client),
+    FOREIGN KEY (demande_aide_id_demande_aide) REFERENCES demande_aide (id_demande_aide)
+);
+
+CREATE TABLE transaction (
+    id_transaction   INT NOT NULL AUTO_INCREMENT,
+    client_id_client INT NOT NULL,
+    PRIMARY KEY (id_transaction),
+    FOREIGN KEY (client_id_client) REFERENCES client (id_client)
+);
+
+ALTER TABLE location
+    ADD CONSTRAINT location_client_fk FOREIGN KEY (client_id_client)
+        REFERENCES client (id_client);
+
+ALTER TABLE location
+    ADD CONSTRAINT location_logement_fk FOREIGN KEY (logement_id_logement)
+        REFERENCES logement (id_logement);
+
+ALTER TABLE location
+    ADD CONSTRAINT location_transaction_fk FOREIGN KEY (transaction_id_transaction)
+        REFERENCES transaction (id_transaction);
+
+ALTER TABLE logement
+    ADD CONSTRAINT logement_destination_fk FOREIGN KEY (destination_id_destination)
+        REFERENCES destination (id_destination);
+
+insert into client values (1,'Doe','John', 'jhondoe@gmail.com','12345','5141234567');
+
+insert into client (nom, prenom, courriel, mot_de_passe, numero_telephone)  values ('Charest-Gagnon', 'Fred', 'charestfred@gmail.com', '54321', '4381234567');
+
+insert into client (nom, prenom, courriel, mot_de_passe, numero_telephone)  values ('Pham', 'Alec', 'phamalec@gmail.com', '23451', '5557891234');
+
+insert into client (nom, prenom, courriel, mot_de_passe, numero_telephone)  values ('Mondat', 'Lili-Rose', 'lilirose.m@gmail.com', '56439', '5554567890');
+
+insert into proprietaire (nom, prenom, courriel, mot_de_passe, numero_telephone)  values ('Rainville', 'Maxime', 'rainville.m@gmail.com', '90452', '5553761289');
+
+insert into proprietaire (nom, prenom, courriel, mot_de_passe, numero_telephone)  values ('Werbrouck', 'Nicolas', 'werbrouck.n@gmail.com', '34278', '5552533579');
+
+insert into destination (ville, region, pays, description)  values ('Montreal', 'Quebec', 'Canada', 'metropole francophone avec une grande diversite culturelle');
+
+insert into destination (ville, region, pays, description)  values ('Rome', 'Latium', 'Italie', "Capitale de l'Italie avec des vestiges antiques");
+
+insert into logement (adresse, nom_proprietaire, destination, prix, description, disponibilite, proprietaire_id_client, destination_id_destination) values ('123 Rue Principale', 'Nicolas Werbrouck', 'Montreal', 200.00, 'Maison au bord du fleuve', 'Disponible',1,2,1,1);
+
+insert into logement (adresse, nom_proprietaire, destination, prix, description, disponibilite, proprietaire_id_client, destination_id_destination) values ('123 Rue Buongiorno', 'Maxime Rainville', 'Rome', 250.00, 'Maison proche du Colisee', 'Disponible',1,1,2,2);
+
+insert into logement (adresse, nom_proprietaire, destination, prix, description, disponibilite, proprietaire_id_client, destination_id_destination) values ('3451 rue de Pizza', 'Nicolas Werbrouck', 'Rome', 2700.00, 'Appart dans le vatican', 'Disponible',2,2,1,2);
+
+insert into logement (adresse, nom_proprietaire, destination, prix, description, disponibilite, proprietaire_id_client, destination_id_destination) values ('Alleesombre et sale', 'Maxime Rainville', 'Montreal', 2.00, 'Cabane en carton a cote du canal Lachine', 'Disponible',1,2,2,1);
+
+CREATE TABLE coups_de_coeur (
+    id_coup_de_coeur             INT NOT NULL AUTO_INCREMENT,
+    id_client INT NOT NULL,
+	id_logement INT NOT NULL,
+    PRIMARY KEY (id_coup_de_coeur),
+    FOREIGN KEY (id_client) REFERENCES client (id_client),
+    FOREIGN KEY (id_logement) REFERENCES logement (id_logement)
+);

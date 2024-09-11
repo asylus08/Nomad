@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= pageTitle %>
+  </title>
+  <%- include ("../Partials/Head.ejs") %>
+  <link rel="stylesheet" href="../../public/CSS/Header.css" type="text/css" />
+  <link rel="stylesheet" href="../../public/CSS/Apropos.css" type="text/css" />
+  <script src="../../public/JavaScript/APropos.js"></script>
+
+</head>
+
+<body>
+  <%- include ("../Partials/Header.ejs") %>
+  <input type="hidden" value="<%= langue %>" id="langue">
+  <!-- barre de navigation -->
+  <nav>
+    <button><a href="/" id="textAccueil">Accueil</a></button>
+    <button><a href="/logement" id="textLogement">Logement</a></button>
+    <button><a href="/coups-de-coeur" id="textCoupsDeCoeur">Coups de coeur</a></button>
+  </nav>
+
+  <h1 id="textTeam">Notre équipe</h1>
+
+  <div class="equipe">
+    <div class="membre">
+      <img src="../../public/images/IMG_20240403_165801_859.jpg">
+      <h3>Frédéric Charest-Gagnon</h3>
+      <p id="textDev1">Développeur</p>
+    </div>
+
+    <div class="membre">
+      <img src="../../public/images/IMG_20240403_170551_732.jpg">
+      <h3>Xavier Lopez-Familiari</h3>
+      <p id="textDev2">Développeur</p>
+    </div>
+
+    <div class="membre">
+      <img src="../../public/images/IMG_20240403_172301_741.jpg">
+      <h3>Lili-Rose Mondat</h3>
+      <p id="textDev3">Développeur</p>
+    </div>
+
+    <div class="membre">
+      <img src="../../public/images/Screenshot_20240403_165935_Gallery.jpg">
+      <h3>Alec Pham</h3>
+      <p id="textDev4">Développeur</p>
+    </div>
+  </div>
+
+  <hr class="separateur">
+
+  <p class="description" id="textPresentation1">
+    Nous sommes quatre étudiants inscrits en techniques de l'informatique au Collège Bois-de-Boulogne. Notre projet,
+    Nomad, est né de notre désir de créer une plateforme de location de logements inspirée par des sites populaires de
+    gestion de voyages tels qu'AirBnb.
+    Notre objectif principal est de fournir une expérience intuitive et conviviale aux utilisateurs en intégrant des API
+    pour enrichir les fonctionnalités de notre site. 
+  </p>
+  <p class="description" id="textPresentation2">
+    Nomad est bien plus qu'une simple plateforme de réservation de logements. C'est une solution complète qui vise à
+    offrir les meilleurs prix et une expérience utilisateur exceptionnelle aux voyageurs du monde entier. Les
+    utilisateurs de Nomad peuvent parcourir
+    notre vaste catalogue de logements, filtrer leurs recherches pour trouver l'hébergement parfait, et effectuer leurs
+    réservations en toute sécurité grâce à un compte utilisateur.
+  </p>
+
+  <hr class="separateur">
+
+  <h2 id="textInfoSupp">Information suplémentaire</h2>
+
+
+  <p class="description" id="textEtablissement">Établissement : Collège Bois-de-Boulogne</p>
+  <p class="description" id="textDepartement">Département: Informatique</p>
+  <p class="description" id="textTech">Technologies utilisées: JavaScript, NodeJS, ExpressJS, MongoDB, HTML/CSS</p>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

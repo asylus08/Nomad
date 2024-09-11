@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageTitle %>
+    </title>
+    <%- include ("../Partials/Bootstrap.ejs") %>
+    <%- include ("../Partials/Head.ejs") %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../public/CSS/Logement.css" type="text/css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="../../public/JavaScript/Logement.js"></script>
+
+</head>
+
+<body>
+    <%- include ("../Partials/Header.ejs") %>
+    <input type="hidden" value="<%= langue %>" id="langue">
+    <!-- barre de navigation -->
+    <nav>
+        <button><a href="/" id="textAccueil">Accueil</a></button>
+        <button class="PageActuelle"><a href="/logement" id="textLogement">Logement</a></button>
+        <button><a href="/coups-de-coeur" id="textCoupsDeCoeur">Coups de coeur</a></button>
+    </nav>
+
+
+    <!-- code pour la barre de recherche -->
+    <div class="container">
+        <div class="milieu recherche">
+                <div class="form-group">
+                    <label for="destination">Destination:</label>
+                    <select id="destination" class="destination" name="destination">
+                        <% for (var i=0; i<destination.length; i++){ %>
+                            <option>
+                                <%= destination[i].pays %>
+                            </option>
+                            <% } %>
+                    </select>
+                </div>
+
+                <!-- champ pour le nombre de chambres -->
+                <div class="form-group">
+                    <label for="numChambre" id="textChambres">Nombre de chambres :</label>
+                    <input type="number" id="numChambre" name="numChambre" min="1" value="1">
+                </div>
+
+                <!-- champ pour le nombre de personnes -->
+                <div class="form-group">
+                    <label for="numPeople" id="textPersonnes">Nombre de personnes :</label>
+                    <input type="number" id="numPeople" name="numPeople" min="1" value="1">
+                </div>
+
+                <!-- code pour le bouton de recherche-->
+                <button class="X" id="boutonRecherche"><img class="searchIcon"
+                        src="../../public/images/search-interface-symbol.png"></button>
+        </div>        
+        <!-- code pour le bouton des filtres -->
+        <button class="Filtre" onclick="openPopup()" id="textFiltres">Filtres</button>
+    </div>
+
+
+    
+
+    <div id="popup" class="popupFiltre">
+        <button class="X" onclick="openPopup()"><img class="X" src="../../public/images/x.png"></button><br>
+        <!-- code pour le formulaire des filtres -->
+            <div class="row">
+                <h1 id="titreFiltres">Filtres</h1>
+                <h2 id="textPrix">Prix</h2>
+                <!-- champ pour le prix minimum -->
+                <input type="range" min="0" max="1000" value="200" class="slider" id="slider" name="slider">
+                <p id="valeur"></p>
+            </div>
+
+            <!-- code pour le bouton enregistrer et reinitialiser-->
+            <button type="submit" class="submit" id="textEnregistrer">Enregistrer</button>
+            <button class="reset"><a class="reset" href="/logement" id="textReinitialiser">Réinitialiser</a></button>
+        
+    </div>
+
+    <div id="logement" class="logementDiv">
+        <!-- Va creer une division pour chaque logement dans la base de données -->
+        <% for (var i=0; i<resultatRecherche.length; i++){ var classEtoile='EtoileVide.png' %>
+            <!-- Regarde si le logement actuelle est dans les favoris de l'utilisateur pour définir la couleur de l'étoile -->
+            <% for (var f=0; f<coupDeCoeur.length; f++){ if
+                (coupDeCoeur[f].equals(resultatRecherche[i]._id)){classEtoile='EtoilePleine.png' ; break;}} %>
+
+                <a href="/information/<%= resultatRecherche[i]._id %>" class="logement" id="<%= resultatRecherche[i]._id %>">
+
+                    <% if (user){ %>
+                        <!-- Regarde si le logement est déja dans les coups de coeur, si oui change la méthode du bouton pour supprimer le favoris lors du prochain click-->
+                        <% if (classEtoile=='EtoilePleine.png' ){var retrait='remove' ;} else { var retrait='add' ;} %>
+                            <form action="/coupDeCoeur/<%= retrait %>/<%= resultatRecherche[i]._id %>" method="post">
+                                <button class="etoile" type="submit"><img src="../../public/images/<%= classEtoile %>"
+                                        alt="" class="imgEtoile"></button>
+                            </form>
+                            <% } %>
+                                <!--Lien qui choisi une image libre de droit aléatoirement avec le prompt donner dans l'addresse -->
+                                <img src="https://source.unsplash.com/296x267/?<%= resultatRecherche[i].adresse %>"
+                                    alt="Attendez une seconde..." style="margin-bottom: 5px;">
+
+                                <h4 class="adresse" >
+                                    <%= resultatRecherche[i].adresse %>
+                                </h4>
+                                <p class="adresse">
+                                    <%= resultatRecherche[i].prix %>$
+                                </p>
+                                <!-- L'étoile s'affichera seulement si l'utilisateur est connecter -->
+
+                </a>
+                <% } %>
+    </div>
+</body>
+
+</html>

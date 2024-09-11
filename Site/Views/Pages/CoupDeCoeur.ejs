@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= pageTitle %>
+    </title>
+    <%- include ("../Partials/Bootstrap.ejs") %>
+    <%- include ("../Partials/Head.ejs") %>
+    <link rel="stylesheet" href="../../public/CSS/Logement.css" type="text/css">
+
+    <script src="../../public/JavaScript/CoupDeCoeur.js"></script>
+</head>
+
+<body>
+
+    <%- include ("../Partials/Header.ejs") %>
+    <input type="hidden" value="<%= langue %>" id="langue">
+    <input type="hidden" value="<%= user %>" id="user">
+    <!-- barre de navigation -->
+    <nav>
+        <button><a href="/" id="textAccueil">Accueil</a></button>
+        <button><a href="/logement" id="textLogement">Logement</a></button>
+        <button class="PageActuelle"><a href="/coups-de-coeur" id="textCoupsDeCoeur">Coups de coeur</a></button>
+    </nav>
+
+    <br> <br> <br>
+    <% if (!user) { %>
+
+        <div id="popup" class="popupConnexion">
+            <h1 id="text1">Veuillez vous connecter</h1>
+            <h1 id="text2">pour avoir accès à la page coups de coeur</h1>
+            <button class="btn btn-bleu btn-retour"><a href="/connexion" id="boutonConnexion">Connexion</a></button>
+        </div>
+        <% } else { %>
+            <div id="coupsdecoeur" class="logementDiv">
+                <% for (var i=0; i<items.length; i++){ %>
+                    <a href="/information/<%= items[i]._id %>" class="logement">
+
+                        <img src="https://source.unsplash.com/296x267/?<%= items[i].adresse %>" alt="">
+                        <h3 class="adresse">
+                            <%= items[i].adresse %>
+                        </h3>
+                        <p class="adresse">
+                            <%= items[i].prix %>$
+                        </p>
+                    </a>
+                    <% } %>
+            </div>
+            <% } %>
+</body>
+
+</html>

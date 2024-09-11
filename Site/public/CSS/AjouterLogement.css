@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@300&display=swap");
+
+/* code css pour le formulaire de connexion */
+.formLogement {
+    background-color: rgba(171, 217, 227);
+    padding: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    width: 37%;
+    margin: 0 auto;
+    border-radius: 0px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    color: #333;
+}
+
+select,
+input[type="text"],
+input[type="number"] {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 16px;
+}
+
+.retour {
+    margin-left: 50px;
+    margin-top: 40px;
+}
+
+.requis::after {
+    content: " *";
+    color: red;
+}
+
+.titre {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 15px;
+}

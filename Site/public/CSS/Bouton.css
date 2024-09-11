@@ -1,0 +1,43 @@
+.btn-bleu {
+    background-color: rgba(171, 217, 227);
+    
+}
+
+.btn-retour {
+    border-radius: 0;
+    width: 160px;
+    margin: 20px;
+}
+
+.btn-ajouter {
+    border-radius: 0;
+}
+
+.btn-bleu:hover {
+    background-color: rgba(171, 217, 227, 0.685);
+    cursor: pointer;
+}
+
+.btn-rouge {
+    background-color: rgba(221, 36, 36, 0.61);
+}
+
+.btn-confirm {
+    margin-top: 30px;
+    background-color: rgba(217, 217, 217);
+    height: 40px;
+}
+
+.retour {
+    display: inline-block; 
+    width: 57px; 
+    height: auto;
+    border: none; 
+    background: none;  
+    text-decoration: none; 
+}
+
+.imgRetour {
+    width: 100%; 
+    height: auto; 
+}

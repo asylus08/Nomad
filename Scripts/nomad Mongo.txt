@@ -1,0 +1,138 @@
+
+use nomad
+
+
+db.createCollection("user", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["nom", "prenom", "courriel", "mot_de_passe", "numero_telephone"],
+            properties: {
+                nom: { bsonType: "string" },
+                prenom: { bsonType: "string" },
+                courriel: { bsonType: "string" },
+                mot_de_passe: { bsonType: "string" },
+                numero_telephone: { bsonType: "string" },
+				coups_de_coeur: {
+					bsonType: "array",
+					items: {
+						bsonType: "objectId"
+					}
+				}
+				
+            }
+        }
+    }
+})
+
+// Create demande_aide collection
+db.createCollection("demande_aide", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["details"],
+            properties: {
+                details: { bsonType: "string" }
+            }
+        }
+    }
+})
+
+// Create destination collection
+db.createCollection("destination", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["ville", "pays"],
+            properties: {
+                ville: { bsonType: "string" },
+                pays: { bsonType: "string" },
+                description: { bsonType: "string" }
+            }
+        }
+    }
+})
+
+// Create location collection
+db.createCollection("location", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["logement_id_logement", "client_id_client", "transaction_id_transaction"],
+            properties: {
+				logement_id_logement: { bsonType: "objectId" },
+                client_id_client: { bsonType: "objectId" },
+                transaction_id_transaction: { bsonType: "objectId" }
+            }
+        }
+    }
+})
+
+// Create logement collection
+db.createCollection("logement", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["adresse", "nom_proprietaire", "destination", "prix", "disponibilite", "nombreChambre", "nombrePersonnes", "proprietaire_id_client", "destination_id_destination"],
+            properties: {
+                adresse: { bsonType: "string" },
+                nom_proprietaire: { bsonType: "string" },
+                destination: { bsonType: "string" },
+                prix: { bsonType: "decimal" },
+                description: { bsonType: "string" },
+                disponibilite: { bsonType: "string" },
+                nombreChambre: { bsonType: "int" },
+                nombrePersonnes: { bsonType: "int" },
+                proprietaire_id_client: { bsonType: "objectId" },
+                destination_id_destination: { bsonType: "objectId" }
+            }
+        }
+    }
+})
+
+// Create proprietaire collection
+db.createCollection("proprietaire", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["nom", "prenom", "courriel", "mot_de_passe"],
+            properties: {
+                nom: { bsonType: "string" },
+                prenom: { bsonType: "string" },
+                courriel: { bsonType: "string" },
+                mot_de_passe: { bsonType: "string" },
+                numero_telephone: { bsonType: "string" }
+            }
+        }
+    }
+})
+
+// Create relation_10 collection
+db.createCollection("relation_10", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["client_id_client", "demande_aide_id_demande_aide"],
+            properties: {
+                client_id_client: { bsonType: "objectId" },
+                demande_aide_id_demande_aide: { bsonType: "objectId" }
+            }
+        }
+    }
+})
+
+// Create transaction collection
+db.createCollection("transaction", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["client_id_client", "logement_id_logement"],
+            properties: {
+                client_id_client: { bsonType: "objectId" },
+				logement_id_logement: {bsonType: "objectId" }
+            }
+        }
+    }
+})
+
+

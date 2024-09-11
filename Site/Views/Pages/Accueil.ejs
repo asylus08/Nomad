@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= pageTitle %>
+  </title>
+  <%- include ("../Partials/Head.ejs") %>
+
+  <link rel="stylesheet" href="../../public/CSS/Accueil.css" type="text/css" />
+  <script src="../../public/JavaScript/Accueil.js"></script>
+
+
+</head>
+
+<body>
+  <%- include ("../Partials/Header.ejs") %>
+    <input type="hidden" id="langue" value="<%= langue %>">
+    <!-- barre de navigation -->
+    <nav>
+      <button class="PageActuelle"><a href="/" id="textAccueil">Accueil</a></button>
+      <button><a href="/logement" id="textLogement">Logement</a></button>
+      <button><a href="/coups-de-coeur" id="textCoupsDeCoeur">Coups de coeur</a></button>
+    </nav>
+
+    <br />
+    <!-- code pour l'image -->
+    <div class="container">
+      <div style="text-align: center">
+        <img src="/public/images/PlaceholderPageAccueil.jpg" class="imgAccueil" />
+      </div>
+
+      <!-- code pour le texte sur l'image -->
+      <div class="overlay">
+        <h1>Nomad</h1>
+        <p class="message" id="texte">
+          Bienvenue sur le site Nomad! Ce site est un site de location de
+          logements qui offre les meilleurs prix pour les voyageurs avides. En
+          étant un utilisateur Nomad, vous allez pouvoir parcourir le vaste
+          catalogue de logements disponibles autour du monde en seulement
+          quelques cliques.
+        </p>
+      </div>
+    </div>
+
+    <p class="vedetteTitre" id="bestSellers">Nos vedettes</p>
+    <div class="vedette">
+      <button class="navArrow left"><img class="arrow" src="../../public/images/left_arrow.png"></button>
+      <div class="offreVedette">
+        <img id="imgLogement">
+        <div class="texteDiv">
+          <h3 id="adresse"></h3>
+          <br />
+          <h4 id="descriptionText">Description</h4>
+          <p id="description"></p>
+          <br />
+          <h4 id="proprioText">Propriétaire</h4>
+          <p id="proprietaire"></p>
+          <br />
+          <h4 id="emplacementText">Emplacement</h4>
+          <p id="emplacement"></p>
+          <br />
+          <h4 id="prixText">Prix</h4>
+          <p id="prix"></p>
+          <br />
+          <h4 id="nbChambreText" >Nombre de chambre : </h4>
+          <p id="nombreChambre"></p>
+          <br />
+          <h4 id="nbPersonnesText">Nombre de personnes pouvant se faire accueillir : </h4>
+          <p id="nombrePersonnes"></p>
+          <br>
+          <button class="logementInfo btn-bleu" id="boutonDetails">Voir détails</button>
+        </div>
+      </div>
+      <button class="navArrow right"><img class="arrow" src="../../public/images/right_arrow.png"></button>
+    </div>
+</body>
+
+</html>

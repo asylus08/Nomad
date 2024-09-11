@@ -1,0 +1,233 @@
+/* code css pour l'image */
+.imgAccueil {
+  width: 1283px;
+  height: 609px;
+  margin-top: 120px;
+  margin-left: 25%;
+  border-radius: 5%;
+  display: block;
+}
+
+/* code pour les filtres */
+.popupFiltre {
+  z-index: 100;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10%;
+  font-family: Inter;
+  text-align: center;
+}
+
+button.X {
+  background: none;
+  border: none;
+  float: right;
+}
+
+img.X {
+  width: 26px;
+  height: 5%;
+}
+
+.submit {
+  position: relative;
+  color: black;
+  font-family: Inter;
+  background-color: rgba(171, 217, 227);
+  border-radius: 0px;
+  margin-top: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 155px;
+  text-align: center;
+  margin-right: 50px;
+  border: none;
+}
+
+.reset {
+  position: relative;
+  color: black;
+  font-family: Inter;
+  background-color: rgba(171, 217, 227);
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 155px;
+  text-align: center;
+  border: none;
+}
+
+a.reset {
+  text-decoration: none;
+  color: black;
+  font-family: Inter;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  color: #333;
+}
+
+input[type="number"] {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: none;
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.logementDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  margin: 50px;
+}
+
+.logement {
+  background-color: transparent;
+  margin-left: 3%; 
+  margin-right: 3%; 
+  margin-bottom: 30px;
+  border: 2px solid rgba(171, 217, 227);
+  border-radius: 10px;
+  width: 320px;
+  height: auto; 
+  text-align: center;
+  padding-top: 10px;
+}
+
+.logement:hover {
+  box-shadow: 0 0 4px rgba(171, 217, 227);
+}
+
+.etoile {
+  z-index: 10;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  margin-left: 80px;
+  float: right;
+  padding-top: 10px;
+}
+
+.container {
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  padding-right: 0;
+  background-color: rgba(171, 217, 227);
+  border-radius: 20px;
+}
+.milieu {
+  margin: 0 auto;
+  align-items: center;
+}
+
+.recherche {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  margin-right: 20px;
+  padding: 5px;
+}
+
+.searchIcon {
+  width: 30px;
+  margin-top: 20px;
+}
+
+/* code css pour le bouton des filtres */
+.Filtre {
+  color: black;
+  font-family: Inter;
+  background-color: rgba(171, 217, 227);
+  width: 100px;
+  height: 95px;
+  text-align: center;
+  border-radius: 0 22px 22px 0;
+  border: 1px solid rgba(0, 0, 0, 0.164);
+  border-top: none; 
+  border-right: none; 
+  border-bottom: none; 
+}
+
+.Filtre:hover {
+  background-color: rgb(136, 173, 182);
+}
+
+h1 {
+  font-size: auto;
+}
+
+.popupConnexion {
+
+  text-align: center;
+  margin-left: -0;
+}
+
+.imgEtoile {
+  height: 50px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(171, 217, 227);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(171, 217, 227);
+  cursor: pointer;
+}
+
+.adresse {
+  white-space: nowrap;    
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+}
+
+.destination {
+  margin-top: 1px;
+  width: 193px;
+  height: 33px;
+  border: none;
+}
+
+.destination {
+  cursor: pointer;
+}

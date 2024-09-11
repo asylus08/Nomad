@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@300&display=swap");
+
+
+/* code css pour le titre de la page */
+.titre {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: black;
+  margin-left: 400px;
+}
+
+/* code css pour le bouton retour */
+.retour {
+  margin-left: 50px;
+  margin-top: 40px;
+}
+
+
+/* code pour les boutons */
+.button {
+  cursor: pointer;
+  font-weight: 500;
+  left: 3px;
+  line-height: inherit;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+
+/* code css pour le bouton payer */
+.Payer{
+  margin-left: 970px;
+  margin-top: 20%;
+  margin-bottom: 20px;
+  font-size: 16px;
+  width: 120px;
+}
+
+
+/* code css pour le form */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: white;
+  font-family: 'Roboto', verdana, sans-serif;
+  height: 100%;
+}
+
+h1 {
+  font-size: 25px;
+  font-weight: 100;
+  color: black;
+  margin-top: 1%;
+}
+
+#cardForm {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.facture {
+  width: 1050px;
+  position: absolute; 
+}
+.charge {
+  display: flex;
+  justify-content: space-between;
+}
+.montant {
+  height: 25px; 
+}
+
+
+/* code css pour le panel */
+.panel {
+  margin-top: -15%;
+  background: white;
+  width: 58%;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
+}
+
+.panel__header {
+  background: rgba(171, 217, 227);
+  color: white;
+}
+
+.panel__header,
+.panel__footer {
+  padding: 1em 2em;
+}
+
+.panel__footer {
+  background: rgb(184, 184, 184);
+}
+
+.panel__content {
+  padding: 1em 2em;  
+}
+

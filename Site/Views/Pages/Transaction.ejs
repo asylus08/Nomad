@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%- include ("../Partials/Bootstrap.ejs") %>
+  <%- include ("../Partials/Head.ejs") %>
+  <link rel="stylesheet" href="../../public/CSS/Transaction.css" type="text/css">
+  <script src="https://js.braintreegateway.com/web/dropin/1.42.0/js/dropin.js"></script>
+  
+  <script src="../../public/JavaScript/Facture.js"></script>
+</head>
+
+<body>
+  <%- include ("../Partials/Header.ejs") %>
+  <input type="hidden" value="<%= langue %>" id="langue">
+  <input type="hidden" id="prixTotalInput" value="<%= prixTotal %>">
+
+  <a href="<%= pageRetour %>" type="button" class="retour"><img class="imgRetour" src="/public/images/left_arrow.png" /></a>
+
+  
+  <h1 class="titre" id="textDetailsTransaction">Détails de la transaction</h1>  
+  <form id="cardForm" action="/payer" method="post">
+    <div class="panel">
+      <header class="panel__header">
+        <h1 id="textDetailsFrais">Détails des frais</h1>
+      </header>
+      <div class="panel__content">
+        <!-- code pour afficher et calculer les champs de la transaction -->
+        <div class="facture">
+          <!-- calcul pour le montant du séjour -->
+          <div id="prixSejour" class="charge">
+            <p class="montant" id="textMontant">Montant du séjour:</p> <p class="montant"><%= prixTotal.toFixed(2) %>$ CAD</p>
+          </div>
+          <!-- calcul pour les frais de nettoyage -->
+          <div id="fraisNettoyage" class="charge">
+            <p class="montant" id="textNettoyage">Frais de nettoyage:</p> <p class="montant"><%= fraisNettoyage.toFixed(2) %>$ CAD</p>
+          </div>
+          <!-- calcul pour les frais de service nomad -->
+          <div id="fraisService" class="charge">
+            <p class="montant" id="textService">Frais de service Nomad:</p> <p class="montant"><%= fraisService.toFixed(2) %>$ CAD</p>
+          </div>
+          <!-- calcul pour les taxes -->
+          <div id="taxes" class="charge">
+            <p class="montant" >Taxes:</p>
+            <p class="montant"><%= taxes.toFixed(2) %>$ CAD</p>
+          </div>
+          <!-- calcul du montant total -->
+          <div id="totalPaye" class="charge">
+            <p class="montant">Total (CAD):</p>
+            <input type="hidden" name="montantTotal" value="<%= totalPaye.toFixed(2) %>">
+            <p class="montant"><%= totalPaye.toFixed(2) %>$ CAD</p>
+          </div>
+        </div>
+      </div>
+      <!-- code pour le bouton payer qui amene a paypal -->
+      <input type="submit" class="Payer btn btn-bleu" onclick="afficherMessage()" value="Payer" id="boutonPayer">
+    </div>
+  </form>
+
+  <script>
+    //code pour afficher un message popup pour aviser du redirigement vers paypal
+    function afficherMessage() {
+        alert("Vous allez être redirigé vers Paypal.");
+    }
+</script>
+</body>
+</html>

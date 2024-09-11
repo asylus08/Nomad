@@ -1,0 +1,47 @@
+
+  <input type="hidden" value="<%= user %>" id="user">
+
+  <div class="navigation">
+    <!-- icônes du logo et du compte -->
+    <div class="header">
+
+      <a href="/"><img class="Logo" src="/public/images/logo.jpg" /></a>
+      <p class="nomad">Nomad</p>
+
+      <form id="myForm" method="get">
+        <input type="hidden" value="<%= pageTitle %>" id="pageTitle">
+        
+        <button class="language" type="submit" id="boutonLanguage">
+          <img class="flag" src="/public/images/france.jpg"></img>
+        </button>
+      </form>
+
+      <div class="infoCompte">
+
+        <% if (user) { %>
+
+          <p name="nomUtilisateur" class="nom">
+            <%= user.NomUtilisateur %>
+          </p>
+          <% } else { %>
+            <p class="nom"></p>
+            <% } %>
+              <button class="option" onclick="ouvrirOption()"><img class="Compte" src="/public/images/compte.png"
+                  alt="" /></button>
+              <div class="popupCompte" id="popupCompte">
+                <% if (!user) { %>
+                  <a class="popupText" href="/connexion" id="textConnexion">Connexion</a>
+                  <a class="popupText" href="/inscription" id="textInscription">Inscription</a>
+                  <% } else { %>
+                    <a class="popupText" href="/infocompte" id="textInfoCompte">Mon compte</a>
+                    <a class="popupText" href="/dashboard" id="textNomad+">Nomad +</a>
+                    <a class="popupText" href="/deconnecter" id="textDeconnexion">Déconnexion</a>
+                    <% } %>
+                      <a class="popupText" href="/apropos" id="textAPropos">A propos</a>
+              </div>
+      </div>
+      <br />
+    </div>
+    <hr class="solid">
+  </div>
+

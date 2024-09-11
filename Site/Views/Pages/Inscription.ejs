@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= pageTitle %>
+  </title>
+  <%- include ("../Partials/Bootstrap.ejs") %>
+  <%- include ("../Partials/Head.ejs") %>
+  <link rel="stylesheet" href="../../public/CSS/Inscription.css" type="text/css" />
+  <script src="../../public/JavaScript/Inscription.js"></script>
+</head>
+
+<body>
+  <%- include ("../Partials/Header.ejs") %>
+  <input type="hidden" value="<%= langue %>" id="langue">
+  <a href="<%= pageRetour %>" type="button" class="retour"><img class="imgRetour" src="/public/images/left_arrow.png" /></a>
+
+  <h1 id="textTitreInscription">Formulaire d'inscription</h1>
+
+  <!-- code pour le formulaire d'inscription -->
+  <form action="/compte/add" method="post" class="formInscription">
+    <div class="row">
+      <!-- champ pour le nom de l'utilisateur -->
+      <div class="col-md-6">
+        <label for="nom" class="form-label requis" id="textNomUser">Nom de l'utilisateur</label>
+        <input type="text" name="nom" id="nom" class="form-control"  placeholder="Exemple" pattern="[A-Za-z\s]*"
+          title="Le nom rentré n'est pas valide, les chiffres ne sont pas pris en compte" required autocomplete="family-name"/>
+      </div>
+
+      <!-- champ pour le prenom de l'utilisateur -->
+      <div class="col-md-6">
+        <label for="prenom" class="form-label requis" id="textPrenomUser">Prénom de l'utilisateur</label>
+        <input type="text" name="prenom" id="prenom" class="form-control" placeholder="Exemple" pattern="[A-Za-z\s]*"
+          title="Le prénom rentré n'est pas valide, les chiffres ne sont pas pris en compte" required autocomplete="given-name"/>
+      </div>
+    </div>
+
+    <!-- champ pour le courriel -->
+    <div class="col-12">
+      <label for="EMAIL" class="form-label requis" id="textEmail">Courriel</label>
+      <input type="text" id="EMAIL" name="courriel" class="form-control" id="CourrielInput" placeholder="exemple@gmail.com"
+        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+        title="L'adresse courriel rentrée n'est pas valide, veuillez suivre ce format : exemple@exemple.ca" required autocomplete="email"/>
+    </div>
+
+    <!-- champ pour le mot de passe -->
+    <div class="col-12">
+      <label for="MOT_DE_PASSE" class="form-label requis" id="textPassword">Mot de passe (Min 8 caractères)</label>
+      <input type="text" id="MOT_DE_PASSE" name="mot_de_passe" class="form-control" pattern=".{8,}"
+        title="Le mot de passe rentré est trop court" required autocomplete="new-password"/>
+    </div>
+
+    <!-- champ pour le numero de telephone -->
+    <div class="col-12">
+      <label for="num_tel" class="form-label requis" id="textNumeroTelephone">Numéro de téléphone</label>
+      <input type="text" id="num_tel" name="numero_telephone" class="form-control" placeholder="000 000 0000"
+        pattern="\d{3} \d{3} \d{4}" title="Le numéro de téléphone n'est pas rentré dans le bon format (000 000 0000)"
+        required  autocomplete="tel"/>
+    </div>
+ 
+    <!-- code pour afficher un message d'erreur -->
+    <% if (typeof errorMessage !=='undefined' && errorMessage !==null) { %>
+      <p class="MessageErreur">
+        <%= errorMessage %>
+      </p>
+      <% } %>
+    
+    <p class="remarque" id="textErreur">*Si vous avez déjà un compte</p>
+    <!-- lien vers la page de connexion -->
+    <a class="remarque lien" href="/connexion" id="lienLogin">Connectez-vous</a>
+
+    <!-- code pour le bouton d'inscription -->
+    <div class="" style="text-align: center">
+      <button class="btn btn-light btn-confirm" type="submit" id="boutonInscription">
+        Inscription
+      </button>
+    </div>
+  </form>
+</body>
+
+</html>

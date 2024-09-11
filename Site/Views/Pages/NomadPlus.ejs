@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>
+    <%= pageTitle %>
+  </title>
+  <%- include ("../Partials/Bootstrap.ejs") %>
+  <%- include ("../Partials/Head.ejs") %>
+  <link rel="stylesheet" href="/public/CSS/NomadPlus.css">
+  
+  <script src="../../public/JavaScript/NomadPlusTrad.js"></script>
+  
+</head>
+
+<body>
+  <%- include ("../Partials/Header.ejs") %>
+  <input type="hidden" value="<%= estProprietaire %>" id="user">
+  <input type="hidden" value="<%= langue %>" id="langue">
+  <input type="hidden" value="<%= logement %>" id="logement">
+  
+  <br>
+  <a href="/logement" type="button" class="retour"><img class="imgRetour" src="/public/images/left_arrow.png" /></a>
+  
+  <div class="container Centre">
+    <h1><%= user.NomUtilisateur %>!</h1>
+    <br>
+  </div>
+  <br>
+  <br>
+
+  <% if (estProprietaire == false) { %>
+    <div class="container Centre">
+      <h2 id="textErreurProprio1">Vous n'etes pas encore propriétaire.</h1>
+        <br>
+        <h2 id="textErreurProprio2">Voulez-vous rejoindre Nomad+ et en devenir un?</h1>
+          <br>
+          <br>
+          <form action="/proprietaire/add" method="post">
+            <button class="btn btn-bleu btn-ajouter" id="boutonProprio">Devenir propriétaire</button>
+          </form>
+          <!-- <h1 id="textStats" style="display: none;">Statistiques</h1>
+        <p style="display: none;" id="textPasRevenus">Vous n'avez pas encore de revenus</p>
+          <select id="typeGraphique" style="display: none;"></select>
+          
+          <canvas style="text-align: center;" id="myChart" style="width:100%;max-width:1000px" style="display: none;"></canvas>
+          <h2 class="Centre" id="textNoLogements" style="display: none;">Vous n'avez pas encore mis de logement a louer, vous pouvez le faire ci dessous.</h2>
+          <button class="btn btn-bleu btn-ajouter" id="boutonAjout" style="display: none;">Ajouter un logement a louer</button> -->
+    </div>
+    <% } else if (logement.length !=0){ %>
+      <div class="container">
+        <div>
+          <h1 id="textStats">Statistiques</h1>
+          <p style="display: none;" id="textPasRevenus">Vous n'avez pas encore de revenus</p>
+          <select id="typeGraphique"></select>
+        </div>
+        <canvas style="text-align: center;" id="myChart" style="width:100%;max-width:1000px"></canvas>
+        <br>
+        <br>
+        <br>
+        <form action="/ajout-logement" class="Centre">
+          <button class="btn btn-bleu btn-ajouter" id="local">Ajouter un logement a louer</button>
+        </form>
+      </div>
+      
+      <div class="container">
+        <br>
+        <h1 id="textTitreLogements">Vos logements</h1>
+        <br>
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr class="table-info">
+              <th id="TextImage">Image</th>
+              <th id="TextAdresse">Adresse</th>
+              <th id="TextDescription">Description</th>
+              <th id="TextLocation">Location</th>
+              <th id="TextActions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (var i=0; i<logement.length; i++){ %>
+              <tr>
+                <td class="Centre"><img src="https://source.unsplash.com/100x100/?<%= logement[i].adresse %>" alt="">
+                </td>
+                <td class="Centre">
+                  <%= logement[i].adresse %>
+                </td>
+                <td class="Centre">
+                  <%= logement[i].description %>
+                </td>
+                <td class="Centre">
+                  <%= logement[i].destination %>
+                </td>
+                <td class="Centre">
+                  <a href="/logement/edit/<%= logement[i]._id %>" class="btn btn-info btn-bleu" id="BoutonModifier_<%= i %>">Modifier</a>
+                  <a href="/logement/delete/<%= logement[i]._id %>" class="btn btn-danger btn-rouge" id="BoutonSupprimer_<%= i %>">Supprimer</a>
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <% } else { %>
+        <div class="container">
+          <div>
+            <h1 id="textStats">Statistiques</h1>
+            <p style="display: none;" id="textPasRevenus">Vous n'avez pas encore de revenus</p>
+            
+            <select id="typeGraphique"></select>
+          </div>
+          <canvas style="text-align: center;" id="myChart" style="width:100%;max-width:1000px"></canvas>
+          <br>
+          <h2 class="Centre" id="textNoLogements">Vous n'avez pas encore mis de logement a louer, vous pouvez le faire ci dessous.</h2>
+          <br>
+          <form style="text-align: center;" action="/ajout-logement">
+            <button class="btn btn-bleu btn-ajouter" id="boutonAjout">Ajouter un logement a louer</button>
+          </form>
+          <br>
+        </div>
+        <% } %>
+
+        
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+          <script src="../../public/JavaScript/NomadPlus.js"></script>
+</body>
+
+</html>

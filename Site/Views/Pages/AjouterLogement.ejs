@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <%- include ("../Partials/Bootstrap.ejs") %>
+    <%- include ("../Partials/Head.ejs") %>
+    
+    <link rel="stylesheet" href="../../public/CSS/AjouterLogement.css" type="text/css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <!-- CSS -->
+    
+  
+    <!-- JS -->
+    <script type="module" src="/public/JavaScript/AjouterLogement.js"></script>
+    
+</head>
+
+<body>
+    <%- include ("../Partials/Header.ejs") %>
+    <input type="hidden" value="<%= langue %>" id="langue">
+    
+    <a href="<%= pageRetour %>" type="button" class="retour"><img class="imgRetour" src="/public/images/left_arrow.png" /></a>
+    <div>        
+        <form id="checkout-form" class="address-form formLogement" action="/logement/add" method="post">
+            <h1 class="titre" ><center id="titreAjout">Ajout d'un logement</center></h1>
+            
+            <!-- champ pour l'adresse  -->
+            <div class="col-12">
+                <label for="adresse" class="form-label requis" id="textAdresse">Adresse</label>
+                <input type="text" name="adresse" id="adresse" class="form-control street" placeholder="123 Blvd"
+                    title="L'adresse entrée n'est pas valide!" required autocomplete="shipping address-line1"/>
+            </div>
+            <div class="row">
+                <!-- champ pour l'emplacement du logement (la ville)  -->
+                <div class="col-md-4">
+                    <label for="destination" class="form-label requis" id="textVille">Ville</label>
+                    <input type="text" name="ville" id="ville" class="form-control" placeholder="Montreal"
+                        title="L'emplacement entré n'est pas valide!" required autocomplete="shipping address-level2"/>
+                </div>
+
+                <!-- champ pour l'emplacement du logement (la région)  -->
+                <div class="col-md-4">
+                    <label for="destination" class="form-label requis" id="textRegion">Région</label>
+                    <input type="text" name="region" id="region" class="form-control" placeholder="Quebec"
+                        title="L'emplacement entré n'est pas valide!" required autocomplete="shipping address-level1"/>
+                </div>
+
+                <!-- champ pour le code postal du logement  -->
+                <div class="col-md-4">
+                    <label for="destination" class="form-label requis" id="textCodePostal">Code postal</label>
+                    <input type="text" name="code_postal" id="code_postal" class="form-control" placeholder="H2C 3DV"
+                        title="L'emplacement entré n'est pas valide!" required autocomplete="shipping postal code"/>
+                </div>
+            </div>
+            <!-- champ pour le prix du logement -->
+            <div class="col-12">
+                <label for="prix" class="form-label requis" id="textPrix">Prix</label>
+                <input type="number" name="prix" id="prix" class="form-control" placeholder="$ ---,---" required />
+            </div>
+    
+            <div class="row">
+                <!-- champ pour le nombre de personnes -->
+                <div class="col-md-6">
+                    <label for="nombrePersonnes" class="form-label requis" id="textNbPersonnes">Nombre de personnes</label>
+                    <input type="number" id="nombrePersonnes" name="nombrePersonnes" class="form-control" placeholder="--"
+                        required />
+                </div>
+    
+                <!-- champ pour le nombre de chambres -->
+                <div class="col-md-6">
+                    <label for="nombreChambre" class="form-label requis" id="textNbChambres">Nombre de chambres</label>
+                    <input type="number" id="nombreChambre" name="nombreChambre" class="form-control" placeholder="--"
+                        required />
+                </div>
+            </div>
+    
+            <!-- champ pour la descrisption du logement -->
+            <div class="col-12">
+                <label for="description" class="form-label requis">Description</label>
+                <input type="text" id="description" name="description" class="form-control" required />
+            </div>
+    
+    
+            <!-- champ pour la disponibilite du logement -->
+            <div class="col-12">
+                <label for="disponibilite" class="form-label requis" id="textDispo">Disponibilité</label>
+                <input type="text" id="disponibilite" name="disponibilite" class="form-control" required />
+            </div>
+    
+            <!-- code pour le bouton pour ajouter le logement -->
+            <div class="" style="text-align: center">
+                <button class="btn btn-light btn-confirm" onclick="afficherMessage()" id="boutonAjout">Ajouter le logement</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        //code pour afficher un message popup si la destination n'est pas dans la base de donnees
+        function afficherMessage() {
+            alert("La destination a été ajoutée à la base de donnée! Veuillez renvoyer votre demande d'ajout de logement.");
+            window.location.href = "/ajout-logement";
+        }
+    </script>
+
+</body>
+</html>

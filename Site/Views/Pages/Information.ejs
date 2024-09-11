@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <%- include ("../Partials/Bootstrap.ejs") %>
+    <%- include ("../Partials/Head.ejs") %>
+    
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include Bootstrap Datepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="../../public/CSS/Information.css" />
+
+    <script src="../../public/JavaScript/Location.js"></script>
+    <script type="module" src="/public/JavaScript/GoogleMap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../public/JavaScript/Information.js"></script>
+  </head>
+  
+<body>
+  <%- include ("../Partials/Header.ejs") %>
+  <input type="hidden" value="<%= langue %>" id="langue">
+  <input type="hidden" value="<%= user %>" id="user">
+  <!-- barre de navigation -->
+  <nav>
+    <button><a href="/" id="textAccueil">Accueil</a></button>
+    <button><a href="/logement" id="textLogement">Logement</a></button>
+    <button><a href="/coups-de-coeur" id="textCoupsDeCoeur">Coups de coeur</a></button>
+  </nav>
+
+  
+  <div class="boutonHautDiv">
+    <form action="/logement">
+      <button class="retour"><img class="imgRetour" src="/public/images/left_arrow.png" /></button>
+    </form>
+
+    <!-- code pour ajouter ou retirer un favoris -->
+    <% if (user) { var methode="add" ; var texteBouton="Ajouter aux favoris" ; %>
+      <% for (var i=0; i<coupDeCoeur.length; i++){ %>
+        <% if (coupDeCoeur[i].equals(logement._id)){ methode="remove" ; texteBouton="Retirer des favoris" } %>
+          <% } %>
+            <form action="/coupDeCoeur/<%= methode %>/<%= logement._id %>" method="post">
+              <button href="" class="btn btn-bleu btn-retour" id="boutonFavoris">
+                <%= texteBouton %>
+              </button>
+            </form>
+            <% } else { %>
+              <a href="/connexion" class="connexion" id="lienConnexion">Connectez vous pour ajouter des favoris</a>
+              <% } %>
+  </div>
+  <div class="map">
+    <div id="map"></div>
+    <div id="street-view"></div>
+  </div>
+  <br>
+
+  <div class="informationDiv">
+    <!-- code pour afficher les informations des logements -->
+    <div class="texteDiv">
+      <h1>
+        <%= logement.adresse %>
+      </h1>
+      <br />
+      <h2 id="descriptionText">Description</h2>
+      <p id="description">
+        <%= logement.description %>
+      </p>
+      <div class="divDescription">
+        <p id="nbChambreText">Nombre de chambre disponible :</p>
+        <p>&nbsp<%= logement.nombreChambre %></p>
+      </div>
+      
+      <div class="divDescription">
+        <p id="nbPersonnesText">Nombre de personne pouvant se faire accueillir :</p> 
+        <p>&nbsp<%= logement.nombrePersonnes %></p>
+      </div>
+      
+      <br />
+      <h2 id="proprioText">Propriétaire</h2>
+      <p>
+        <%= logement.nom_proprietaire %>
+      </p>
+      <br />
+      <h2 id="emplacementText">Emplacement</h2>
+      <p id="emplacement">
+        <%= logement.destination %>
+      </p>
+      <br />
+      
+      <input type="hidden" value="<%= logement.geocode %>" id="geocode">
+    </div>
+    <div class="locationDiv">
+      <h2 id="prixText">Prix</h2>
+      <p>
+        <%= logement.prix %>$
+      </p>
+      <div class="popupReservation">
+        <!-- <h1 class="text-center">Date Selector</h1> -->
+        <div class="row">
+            <div class="col-md-6">
+                <div >
+                    <label for="datepicker1" id="textDateArrivee">Date d'arrivée</label>
+                    <input type="date" class="form-control date" id="datepicker1" name="datepicker1"  >
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div >
+                    <label for="datepicker2" id="textDateDepart">Date de départ</label>
+                    <input type="date" class="form-control date" id="datepicker2" name="datepicker2">
+                </div>
+            </div>
+        </div>
+        
+        <div >
+          <div class="form-group">
+            <form action="/transaction" id="reserver" method="GET">
+              
+              <!-- trouver un moyen d'envoyer la valeur du prix total au serveur-->
+              
+              <p id="prix" class="mt-3" style="display: block;"><input type="hidden" id="hiddenPrix" value="<%= prix %>" /></p>
+              <input type="hidden" id="prixTotalInput" name="prixTotal">
+            
+            <p id="prixR" class="mt-3" name="prixTotal"></p>
+            <button class="boutonClassique btn btn-bleu" id="reserverBtn" type="submit">Confirmer</button>
+            <div id="result" ></div>
+            </form>
+            
+        </div>                  
+      </div>
+    </div>
+      </div>
+    </div>
+      
+    </div>
+    <input type="hidden" value="<%= logement.geocode %>" id="geocode">
+  </div>
+
+  
+
+    
+</body>
+</html>

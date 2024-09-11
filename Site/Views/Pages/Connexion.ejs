@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= pageTitle %>
+  </title>
+  
+  <%- include ("../Partials/Bootstrap.ejs") %>
+  <%- include ("../Partials/Head.ejs") %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="../../public/CSS/Connexion.css" type="text/css" />
+  <script src="../../public/JavaScript/Connexion.js"></script>
+  
+</head>
+
+<body>
+  <%- include ("../Partials/Header.ejs") %>
+  <input type="hidden" value="<%= langue %>" id="langue">
+  <a href="<%= pageRetour %>" type="button" class="retour"><img class="imgRetour" src="/public/images/left_arrow.png" /></a>
+
+  <h1 id="textConnexionPage">Connectez-vous</h1>
+  <form id="loginForm" action="/connexion" method="post" class="formConnexion">
+    <!-- champ pour le courriel -->
+    <div class="col-12">
+      <label for="EMAIL" class="form-label requis" id="textCourriel">Courriel</label>
+      <input type="text" id="EMAIL" name="courriel" class="form-control" required />
+    </div>
+
+    <!-- champ pour le mot de passe -->
+    <div class="col-12">
+      <label for="MOT_DE_PASSE" class="form-label requis" id="textMDP">Mot de passe</label>
+      <input type="password" id="MOT_DE_PASSE" name="mot_de_passe" class="form-control" required />
+    </div>
+
+    <!-- code pour afficher un message d'erreur -->
+    <% if (typeof errorMessage !=='undefined' && errorMessage !==null) { %>
+      <p class="MessageErreur">
+        <%= errorMessage %>
+      </p>
+      <% } %>
+
+        <p class="remarque" id="textErreur">*Si vous n'avez pas de compte</p>
+
+        <!-- lien vers la page d'inscription -->
+        <a class="remarque lien" href="/inscription" id="textInscriptionLien">Inscrivez-vous</a>
+
+        <!-- code pour le bouton de connexion -->
+        <div class="col-12" style="text-align: center">
+          <button class="btn btn-light btn-confirm" id="textBoutonConnexion">Connexion</button>
+        </div>
+  </form>
+</body>
+
+</html>
